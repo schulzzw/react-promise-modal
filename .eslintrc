@@ -32,14 +32,6 @@
   "overrides": [
     {
       "files": [
-        "src/context_providers/**"
-      ],
-      "rules": {
-        "react/no-unused-state": "off"
-      }
-    },
-    {
-      "files": [
         "**/*.spec.{js,jsx}",
         "**/*.test.{js,jsx}"
       ],
@@ -49,6 +41,19 @@
       },
       "rules": {
         "global-require": "off",
+        "function-paren-newline": ["error", "consistent"]
+      }
+    },
+    {
+      "files": [
+        "**/**"
+      ],
+      "globals": {
+        "fail": false,
+        "when": false
+      },
+      "rules": {
+        "react/jsx-filename-extension": "off",
         "function-paren-newline": ["error", "consistent"]
       }
     },

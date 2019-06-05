@@ -4,8 +4,11 @@
   "description": "library to turn modal ineractions into a promise",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack  --mode=production"
+    "test": "jest",
+    "test:watch": "jest --env=jsdom --watch",
+    "build": "webpack  --mode=production",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,14 @@
   "homepage": "https://github.com/schulzzw/react-promise-modal#readme",
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
+    "@testing-library/react": "^8.0.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.1",
     "css-loader": "^1.0.0",
@@ -35,12 +45,18 @@
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "jest": "^24.8.0",
     "node-sass": "^4.9.3",
+    "react-hooks-testing-library": "^0.5.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
     "url-loader": "^1.1.1",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-is": "^16.8.6"
+  }
 }
