@@ -6,14 +6,18 @@ const ModalContext = React.createContext();
 
 const ModalProvider = ({ children, Modal }) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [modalChildren, setModalChildren] = React.useState(null);
+  const [ModalContent, setModalChild] = React.useState(null);
   const [modalProps, setModalProps] = React.useState({});
+
+  const setModalContent = Content => setModalChild(() => Content);
   return (
     <ModalContext.Provider
-      value={{ setIsOpen, setModalChildren, setModalProps }}
+      value={{ setIsOpen, setModalContent, setModalProps }}
     >
       {children}
-      <Modal open={isOpen} {...modalProps} >{modalChildren}</Modal>
+      <Modal open={isOpen} >
+        { ModalContent ? <ModalContent {...modalProps} /> : null }
+      </Modal>
     </ModalContext.Provider>
   );
 };

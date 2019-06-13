@@ -1,0 +1,47 @@
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { PromiseModal, usePromiseModal } from '../PromiseModal';
+
+
+const Modal = ({ open, children }) => {
+  if (!open) {
+    return null;
+  }
+  return (
+    <div>{children}</div>
+  );
+};
+
+const Stuff = () => {
+  const [message, setMessage] = React.useState('');
+  const Content = React.useMemo(() => ({ clickButton1, clickButton2 }) => (
+    <React.Fragment>
+      <button onClick={clickButton1}>click 1</button>
+      <button onClick={clickButton2}>click 2</button>
+    </React.Fragment>
+  ), []);
+  const { launchPromiseModal } = usePromiseModal(Content);
+
+  const handleClick = async () => {
+    console.log('started');
+    const result = await launchPromiseModal({ actionProps: ['clickButton1', 'clickButton2'] });
+    console.log('resolved');
+    setMessage(`You clicked ${result}`);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Open</button>
+      {message}
+    </div>
+  );
+};
+
+storiesOf('PromiseModal', module)
+  .addWithJSX('with default modal', () => (
+    <PromiseModal
+      Modal={Modal}
+    >
+      <Stuff />
+    </PromiseModal>
+  ));

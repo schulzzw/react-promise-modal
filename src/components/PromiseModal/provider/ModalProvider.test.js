@@ -4,12 +4,17 @@ import renderComponent from '../../../testUtils/renderComponent';
 import { ModalProvider, ModalContext } from './ModalProvider';
 
 /* eslint-disable */
-const Modal = ({ open, children, ...rest }) => (
+const Modal = ({ open, children }) => (
   <React.Fragment>
     <div>the modal</div>
     {open ? <div>open</div> : null}
     {children === null ? <div>null children</div> : children}
-    <div>additional prop length {Object.keys(rest).length}</div>
+  </React.Fragment>
+);
+const ModalContent = (props) => (
+  <React.Fragment>
+    <div>modal children</div>
+    <div>additional prop length {Object.keys(props).length}</div>
   </React.Fragment>
 );
 
@@ -20,7 +25,7 @@ const children = (
         <div>the children</div>
         <div onClick={() => value.setIsOpen(true)}>setIsOpenTrue</div>
         <div onClick={() => value.setIsOpen(false)}>setIsOpenFalse</div>
-        <div onClick={() => value.setModalChildren(<div>modal children</div>)}>setModalChildren</div>
+        <div onClick={() => value.setModalContent(ModalContent)}>setModalContent</div>
         <div onClick={() => value.setModalProps({ one: 'prop', two: 'props'})}>setModalProps</div>
       </React.Fragment>
     )}
@@ -58,10 +63,6 @@ describe('Modal Provider', () => {
       const { output: { getByText } } = renderModalProvider();
       expect(getByText('null children')).toBeDefined();
     });
-    it('initializes with modal additional props as empty', () => {
-      const { output: { getByText } } = renderModalProvider();
-      expect(getByText('additional prop length 0')).toBeDefined();
-    });
   });
 
   describe('setIsOpen', () => {
@@ -72,17 +73,25 @@ describe('Modal Provider', () => {
     });
   });
 
-  describe('setModalChildren', () => {
+  describe('setModalContent', () => {
     it('sets the modal children', async () => {
       const { output: { getByText } } = renderModalProvider();
-      fireEvent.click(getByText('setModalChildren'));
+      fireEvent.click(getByText('setModalContent'));
       await waitForElement(() => getByText('modal children'));
+    });
+    it('defaults with props as empty', async () => {
+      const { output: { getByText } } = renderModalProvider();
+
+      fireEvent.click(getByText('setModalContent'));
+      await waitForElement(() => getByText('additional prop length 0'));
     });
   });
 
   describe('setModalProps', () => {
     it('sets the additional modal props', async () => {
       const { output: { getByText } } = renderModalProvider();
+      fireEvent.click(getByText('setModalContent'));
+      await waitForElement(() => getByText('additional prop length 0'));
       fireEvent.click(getByText('setModalProps'));
       await waitForElement(() => getByText('additional prop length 2'));
     });
