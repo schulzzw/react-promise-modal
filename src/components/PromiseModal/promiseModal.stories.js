@@ -21,7 +21,7 @@ const Content = ({ clickButton1, clickButton2 }) => (
 
 const Stuff = () => {
   const [message, setMessage] = React.useState('');
-  
+
   const { launchPromiseModal } = usePromiseModal(Content);
 
   const handleClick = async () => {
