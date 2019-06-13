@@ -12,20 +12,20 @@ const Modal = ({ open, children }) => {
   );
 };
 
+const Content = ({ clickButton1, clickButton2 }) => (
+  <React.Fragment>
+    <button onClick={clickButton1}>click 1</button>
+    <button onClick={clickButton2}>click 2</button>
+  </React.Fragment>
+);
+
 const Stuff = () => {
   const [message, setMessage] = React.useState('');
-  const Content = React.useMemo(() => ({ clickButton1, clickButton2 }) => (
-    <React.Fragment>
-      <button onClick={clickButton1}>click 1</button>
-      <button onClick={clickButton2}>click 2</button>
-    </React.Fragment>
-  ), []);
+  
   const { launchPromiseModal } = usePromiseModal(Content);
 
   const handleClick = async () => {
-    console.log('started');
     const result = await launchPromiseModal({ actionProps: ['clickButton1', 'clickButton2'] });
-    console.log('resolved');
     setMessage(`You clicked ${result}`);
   };
 

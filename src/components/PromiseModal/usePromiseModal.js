@@ -23,7 +23,6 @@ const usePromiseModal = (initialModalChildren = null) => {
     checkForDupKeys(Object.keys(modalProps), actionProps);
 
     const actionHandler = (cb, name) => () => {
-      console.log('clicked');
       setIsOpen(false);
       cb(name);
     };
