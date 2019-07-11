@@ -1,6 +1,6 @@
 {
   "name": "@zmccreations/react-promise-modal",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "library to turn modal ineractions into a promise",
   "main": "index.js",
   "scripts": {
