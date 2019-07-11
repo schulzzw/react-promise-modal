@@ -18,9 +18,9 @@ module.exports = {
     extensions: ['.js', '.json'],
   },
   output: {
-    path: path.resolve(__dirname, 'dist/'),
+    path: path.resolve(__dirname),
     publicPath: '',
-    filename: 'modal-promise.js',
+    filename: 'index.js',
     libraryTarget: 'umd',
   },
 };
